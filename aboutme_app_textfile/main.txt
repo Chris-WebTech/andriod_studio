@@ -1,0 +1,565 @@
+
+/*
+ Assignment - About Me Page
+ Creator    - Christopher Miller
+ Fall 2024
+
+-----------> Styled to Samsung Galaxy S8+ <--------------
+----------->  Recommended Pixels 360/700  <---------------
+*/
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MaterialApp(
+      home: const MyApp(),
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        "/HomePage": (BuildContext context) =>HomePage(),
+        "/SecondPage": (BuildContext context) =>SecondPage(),
+        "/ThirdPage": (BuildContext context) => ThirdPage(),
+      }
+  ));
+}
+
+// ------------------> This is HomePage Context <---------------------
+Widget homeContext() {
+  return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+
+      children: [
+        Image.asset('images/img1.png', height: 200, width: 500, fit: BoxFit.cover,),
+        const Text("\n\n."),// separation
+        contextCard(heading1: const Text("A Little About Me",
+            style: TextStyle(fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
+            context1: const Text("My name is Christopher Miller, and I am an Entery Level "
+                "Web Developer. I gained foundational coding skills and "
+                "techniques while majoring in Web Technology "
+                "at Flathead Valley Community College in Kalispell, Montana. ",
+              style: TextStyle(color: Colors.white54),)
+        ),
+        const Text("\n."),
+        const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+        const Text("\n."),
+        Image.asset( 'images/army.jpeg',
+            height: 200, width: 300, fit: BoxFit.cover),
+        contextCard(heading1: const Text("My Experience",
+            style: TextStyle(fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
+            context1: const Text("\n\nBefore attending college, I severed as an "
+                "Infantry man in the United States Army. I worked as a"
+                "team-leader where I developed commendable training and"
+                "team player skills. In addition, I have 7 years of sales"
+                "experience in both large and small organisation; Where I,"
+                "developed Interpersonal communication and customer service"
+                "experience.",
+                style: TextStyle(color: Colors.white54))
+        ),
+      ]);
+}
+Widget theSkills(){
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const Text("\n."),
+      const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+      const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("\nMy Soft Skills", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
+        ]
+      ),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          mySkills(
+            theSkill: const Text("Time Management", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Colors.white)),
+            timeY: const Text("5 Years",style: TextStyle(color: Colors.white54,)),
+          ),
+          mySkills(
+            theSkill: const Text("Communication", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Colors.white)),
+            timeY: const Text("6 Years",style: TextStyle(color: Colors.white54,)),
+          )
+        ],
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          mySkills(
+            theSkill: const Text("Customer Service", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Colors.white)),
+            timeY: const Text("7 Years",style: TextStyle(color: Colors.white54,)),
+          ),
+          mySkills(
+            theSkill: const Text("Attention to Detail", style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white)),
+            timeY: const Text("5 Years",style: TextStyle(color: Colors.white54,)),
+          ),
+        ],
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          mySkills(
+            theSkill: const Text("Interpersonal Communication", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Colors.white)),
+            timeY: const Text("2 Years",style: TextStyle(color: Colors.white54,)),
+          ),
+          mySkills(
+            theSkill: const Text("Management", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Colors.white)),
+            timeY: const Text("2 Years",style: TextStyle(color: Colors.white54,)),
+          ),
+        ],
+      ),
+      const Text("\n\n"),],
+  );
+}
+
+// ---------- Future Login -------------
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyApp createState() => _MyApp();
+}
+
+class _MyApp extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(backgroundColor: Colors.black,
+        appBar: AppBar(title: const Text("Welcome New User"),backgroundColor: Colors.red.shade400),
+        body: ListView(
+            padding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            children: [
+              Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text("\nHello World",style: TextStyle(fontSize: 28.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                        const Divider(
+                          height: 20,
+                          thickness: 5,
+                          color: Colors.redAccent,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed("/HomePage");
+                            },
+                            icon: const Icon(Icons.home, color: Colors.red),
+                            iconSize: 70.0)
+                      ])),
+
+            ]));
+  }
+}
+
+// ---------- Build Homepage -------------
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(backgroundColor: Colors.black,
+      appBar: AppBar(
+
+          title:const Text("About Me Page"),
+          backgroundColor: Colors.red.shade400),
+      body: ListView(children: [
+        homeContext(),
+        theSkills(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home,
+                  color: Colors.red),
+              padding: EdgeInsets.zero,
+              iconSize: 50.0,
+              onPressed: (){
+                Navigator.of(context).pushNamed("/HomePage");
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.dashboard,
+                  color: Colors.red),
+              padding: EdgeInsets.zero,
+              iconSize: 50.0,
+              onPressed: (){
+                Navigator.of(context).pushNamed("/SecondPage");
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_tree,
+                  color: Colors.red),
+              padding: EdgeInsets.zero,
+              iconSize: 50.0,
+              onPressed: (){
+                Navigator.of(context).pushNamed("/ThirdPage");
+              },
+            ),
+          ],
+        ),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Home",style: TextStyle(color: Colors.red)),
+            Text("Hobbies",style: TextStyle(color: Colors.red)),
+            Text("Designs",style: TextStyle(color: Colors.red)),
+          ],
+
+        ),
+        const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+        const Text("\n."),// separation
+
+      ]),
+    );
+  }
+}
+
+// ------------------> This is Hobbies Page Content <---------------------
+Widget hobbiesContext() {
+  return contextCard(heading1: const Text("My Times spent...",
+      style: TextStyle(fontSize: 20.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.white)),
+      context1: const Text("\n\nI was born and raised in Kalispell, MT."
+          " so the majority of my free time is spent enjoying"
+          " the outdoors and the amazing photosynthesis in Montana."
+          " Additionally, I found an interest in creating Websites when I was"
+          " a freshmen in high school; However, due to the rapid lifestyle "
+          "in the US military, I put this on hold for a short time. "
+          "\n\nI also rescued a red-nose bit-bull that needs an"
+          "absorbed amount of attention and affection. Her name is Hades and"
+          " she also keeps me outdoors and active as she loves "
+          "sniffing and running through the grass.",
+          style: TextStyle(color: Colors.white54))
+  );
+}
+
+// ------------ Build second page -----------------
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) :super (key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(backgroundColor: Colors.black,
+      appBar: AppBar(
+
+          title:const Text("Hobbies Page"),
+          backgroundColor: Colors.red.shade400),
+      body: ListView(children: [
+        Image.asset('images/img4.png', height: 200, width: 500, fit: BoxFit.cover),
+        const Text("\n\n."),// separation
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            hobbiesContext(),
+            const Text("\n."),
+            const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+            const Text("\n."),
+            const Text("Pictures\n",style: TextStyle(fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset('images/img3.jpg', height: 300, width: 150, fit: BoxFit.cover),
+                  Image.asset('images/img2.jpg', height: 300, width: 150, fit: BoxFit.cover),
+                ]),
+            Container(
+              margin: const EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 0.0),
+              child: Image.asset('images/img5.jpg', height: 150, width: 320, fit: BoxFit.cover),
+            ),
+            const Text("\n."),],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home,
+                  color: Colors.red),
+              padding: EdgeInsets.zero,
+              iconSize: 50.0,
+              onPressed: (){
+                Navigator.of(context).pushNamed("/HomePage");
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.dashboard,
+                  color: Colors.red),
+              padding: EdgeInsets.zero,
+              iconSize: 50.0,
+              onPressed: (){
+                Navigator.of(context).pushNamed("/SecondPage");
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_tree,
+                  color: Colors.red),
+              padding: EdgeInsets.zero,
+              iconSize: 50.0,
+              onPressed: (){
+                Navigator.of(context).pushNamed("/ThirdPage");
+              },
+            ),
+          ],
+        ),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Home",style: TextStyle(color: Colors.red)),
+            Text("Hobbies",style: TextStyle(color: Colors.red)),
+            Text("Designs",style: TextStyle(color: Colors.red)),
+          ],
+        ),
+        const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+        const Text("\n."),// seperation
+
+      ]),
+    );
+  }
+}
+
+
+// ------------------> This is Design Page Content <---------------------
+Widget designContext(){
+  return contextCard(heading1: const Text("Explore My Designs",
+      style: TextStyle(fontSize: 20.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.white)),
+      context1: const Text(
+          "\n\nHere is a collection of my HTML, and CSS "
+              "manipulation and styling skills. I have studied"
+              "SEO optimization practices to transform your"
+              "Webpages for the intended audience; Maximizing"
+              "your webpage efficiency and design remains my"
+              "ambitions."
+          ,
+          style: TextStyle(color: Colors.white54))
+  );
+}
+class ThirdPage extends StatefulWidget {
+  const ThirdPage({Key? key}) : super(key: key);
+
+  @override
+  _ThirdPage createState() => _ThirdPage();
+}
+class _ThirdPage extends State {
+  String imgCarousel = "Logo";
+  var imgCounter = 0;
+  Color buttonColor = Colors.red.shade400;
+
+  String aLogo = "images/logo.png";
+  String farmPhoto = "images/farm.png";
+  String roofPhoto = "images/roofing.png";
+  String shelterPhoto = "images/shelter.png";
+  String displayPhoto = "images/logo.png";
+
+  Widget imgSelected(String selectStooge) {
+    return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Image.asset(selectStooge,
+            height: 400, width: 300, fit: BoxFit.contain));
+  }
+
+  void changeImage() {
+    // increment counter
+    imgCounter++;
+
+    // set the state of several variables
+    // based on the % remainder - pick the right stooge
+    // in  order to change in variable value
+    // have to do it in setState()
+
+    setState(() {
+      if ((imgCounter % 3 == 0)) {
+        imgCarousel = "Logo";
+        buttonColor = Colors.red.shade600;
+        displayPhoto = aLogo;
+      } else if ((imgCounter % 3 == 1)) {
+        imgCarousel = "Farm";
+        buttonColor = Colors.red.shade400;
+        displayPhoto = farmPhoto;
+      } else if ((imgCounter % 3 == 2)) {
+        imgCarousel = "Roofing";
+        buttonColor = Colors.red;
+        displayPhoto = roofPhoto;
+      } else if ((imgCounter % 3 == 3)) {
+        imgCarousel = "Shelter";
+        buttonColor = Colors.redAccent;
+        displayPhoto = shelterPhoto;
+      }
+    });
+  }
+  //----------------- Build page Three ----------------
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold( backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text("My WordPress Designs"),
+          backgroundColor: Colors.red.shade400
+      ),
+      body: ListView(children: [
+        Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset('images/img4.png', height: 200, width: 500, fit: BoxFit.cover),
+              const Text("\n\n."),// separation
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  designContext(),
+                ],
+              ),
+        Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Text("\nImage Carousel", style: TextStyle(fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white)),
+          imgSelected(displayPhoto),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: buttonColor,
+                  shadowColor: Colors.red,
+                  elevation: 10,
+                  textStyle: const TextStyle(color: Colors.redAccent)),
+              onPressed: changeImage,
+              child: Text(imgCarousel)),
+
+                Column(
+                  children: [
+                    const Text("\n"),
+                    const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+                    const Text("\n\n."),// separation
+
+                    Image.asset('images/logo.png', height: 300, width: 300, fit: BoxFit.contain),
+                    Image.asset('images/farm.png', height: 300, width: 300, fit: BoxFit.contain),
+                    Image.asset('images/shelter.png', height: 300, width: 300, fit: BoxFit.contain),
+                    Image.asset('images/roofing.png', height: 300, width: 300, fit: BoxFit.contain),
+
+                  ],
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.home,
+                      color: Colors.red),
+                  padding: EdgeInsets.zero,
+                  iconSize: 50.0,
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/HomePage");
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.dashboard,
+                      color: Colors.red),
+                  padding: EdgeInsets.zero,
+                  iconSize: 50.0,
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/SecondPage");
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.account_tree,
+                      color: Colors.red),
+                  padding: EdgeInsets.zero,
+                  iconSize: 50.0,
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/ThirdPage");
+                  },
+                ),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("Home",style: TextStyle(color: Colors.red)),
+                Text("Hobbies",style: TextStyle(color: Colors.red)),
+                Text("Designs",style: TextStyle(color: Colors.red)),
+              ],
+
+            ),
+            const Divider(color: Colors.redAccent, indent: 10, endIndent: 10,),
+            const Text("\n."),// separation
+          ]),
+      ]),
+    );
+  }
+}
+
+// Widget build
+class contextCard extends StatelessWidget {
+
+  final Widget heading1;
+  final Widget context1;
+
+  // constructor
+  contextCard({Key? key,
+
+    this.heading1 =
+    const Text(""),
+    this.context1 =
+    const Text(""),
+
+  }): super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+        margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 5.0),
+        width: 300,
+        child: Card(
+            color: Colors.transparent,
+            child: Container(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(children: <Widget>[heading1,context1])
+            )
+        )
+    );
+  }
+}
+
+//widget build
+class mySkills extends StatelessWidget {
+
+  final Widget theSkill;
+  final Widget timeY;
+
+  // constructor
+  mySkills({Key? key,
+
+    this.theSkill =
+    const Text(""),
+    this.timeY =
+    const Text(""),
+
+  }): super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(5.0),
+        margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        decoration: BoxDecoration(border: Border.all(color: Colors.white), borderRadius: BorderRadius.circular(10.0)),
+        child: Card(
+          color: Colors.transparent,
+            child: Container(
+                child: Column(children: <Widget>[theSkill,timeY])
+            )
+        )
+    );
+  }
+}
