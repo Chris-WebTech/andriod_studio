@@ -1,0 +1,184 @@
+// Christopher Miller
+// Drawer Assignment
+// Custom Widgets
+
+//--- Because +1000 lines of code is a scroll
+import 'package:flutter/material.dart';
+
+class CalculatorButton extends StatelessWidget {
+
+  final String xValue;
+  final Function callBack;
+  final Color btnColor;
+  final Color outlColor;
+  final Color txtColor;
+  final txtSize;
+
+  const CalculatorButton({super.key,
+    required this.xValue,
+    required this.callBack,
+    required this.btnColor,
+    required this.outlColor,
+    required this.txtColor,
+    required this.txtSize
+});
+
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      margin: const EdgeInsets.all(5.0),
+      child: SizedBox(
+        width: 70,
+        height: 70,
+        child: ElevatedButton(
+          onPressed: (){callBack(xValue);},
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 2.0, // Border width
+                color: outlColor, // Border color
+              ),
+              borderRadius: BorderRadius.circular(40.0), // Border radius
+            ),
+            backgroundColor: btnColor,
+          ),
+          child: Text(xValue, style: TextStyle(color: txtColor,
+              fontSize: txtSize, fontWeight: FontWeight.w900),),
+        ),
+      )
+    );
+  }
+}
+
+// Widget build
+class Calc_answer extends StatelessWidget {
+
+  final Widget calcHistory;
+  final Widget calcAnswer;
+
+  // constructor
+  const Calc_answer({super.key,
+
+    this.calcHistory =
+    const Text(""),
+    this.calcAnswer =
+    const Text(""),
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: const Alignment(1.0, 1.0),
+        padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFFff0156)),
+          borderRadius: BorderRadius.circular(10.0), // Border radius
+        ),
+        margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 5.0),
+        width: 300,
+        child: Card(
+            color: Colors.transparent,
+            child: Column(children: <Widget>[calcHistory,calcAnswer])
+        )
+    );
+  }
+}
+
+// Widget build
+class userInput extends StatefulWidget {
+
+  final Widget input1Disc;
+  final Widget tc1Input;
+  final Widget input2Disc;
+  final Widget tc2Input;
+
+  // constructor
+  const userInput({super.key,
+
+    this.input1Disc =
+    const Text(""),
+    this.tc1Input =
+    const SizedBox(),
+
+    this.input2Disc =
+    const Text(""),
+    this.tc2Input =
+    const SizedBox(),
+
+  });
+
+  @override
+  State<userInput> createState() => _userInputState();
+}
+
+class _userInputState extends State<userInput> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFFff0156)),
+          borderRadius: BorderRadius.circular(10.0), // Border radius
+        ),
+        margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+        width: 320,
+        child: Card(
+            color: Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    widget.input1Disc,
+                    widget.tc1Input
+                ],),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    widget.input2Disc,
+                    widget.tc2Input
+                ],)
+            ])
+        )
+    );
+  }
+}
+
+// add red box around content
+class contextCard extends StatelessWidget {
+
+  final Widget heading1;
+  final Widget context1;
+
+  // constructor
+  const contextCard({super.key,
+
+    this.heading1 =
+    const Text(""),
+    this.context1 =
+    const Text("")
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(0),
+        alignment: Alignment.center,
+        width: 300,
+        child: Card(
+            color: Colors.transparent,
+            child: Container(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[heading1,context1]
+                )
+            )
+        )
+    );
+  }
+}
