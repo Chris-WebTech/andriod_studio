@@ -1,0 +1,303 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        "/HomePage": (BuildContext context) =>const HomePage(),
+      }
+  ));
+}
+
+class HomePage extends StatefulWidget {
+
+  const HomePage({super.key});
+
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<HomePage> with
+    SingleTickerProviderStateMixin {
+
+  Image theImg = Image.asset('assets/ximg.jpg');
+  // Global Slider Variables
+
+  double rvalue = 0;
+  double value1 = 5;
+  double value2 = 5;
+  double offSetX = 0;
+  double offSetY = 0;
+
+  double _rotateValue= 180;
+  double _sliderValue1 = 5;
+  double _sliderValue2 = 5;
+  double _sliderOffX = 5;
+  double _sliderOffY = 5;
+
+  late TabController _tabController;
+
+  final List<Tab> mytabs = <Tab>[
+    const Tab(text:"Home"),
+    const Tab(text: "Image Tilt",),
+    const Tab(text: "Size Image",),
+    const Tab(text: "Movable",)
+  ];
+
+  @override
+  void initState(){
+    super.initState();
+    _tabController = TabController(vsync: this, length: mytabs.length);
+  }
+
+  // If you have init - you need dispose
+  // Reverse order that created in initState
+  @override
+  void dispose(){
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  TextStyle myQuoteStyle = const TextStyle(fontSize: 28,);
+
+  // FutureBuilder is a widget
+  Widget homeContext() {
+    return FutureBuilder(
+        future: DefaultAssetBundle.of(context)
+            .loadString("assets/homepage_context.txt"),
+        builder: (context, snapshot) {
+          return Column(
+            children: [
+              const Text("Read Text File", textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+              const Divider(thickness: 3, color: Colors.yellow,),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
+                child:
+                  Text(snapshot.data ?? '', softWrap: true,style: const TextStyle(fontSize: 16),),
+              )
+            ],
+          );
+        });
+  }
+
+  Widget rotateSlider() {
+    return Slider(
+      activeColor: const Color(0xffFFF321),
+      inactiveColor: const Color(0xff121212),
+
+      max: 360,
+      min: 0,
+
+      value: _rotateValue,
+      onChanged: (value){
+        setState(() {
+          rvalue = value.roundToDouble();
+          _rotateValue = value.roundToDouble();
+          rotateImg();
+        });
+      },
+    );
+  }
+
+  rotateImg() {
+    // alignment is needed for the height width
+    // base point for flutters measurements
+    return Align(
+        alignment: Alignment.center,
+        child: Transform.rotate(
+            angle: rvalue * (pi / 180),
+            child: SizedBox(
+              height: 200,
+              width: 200,
+              child: Container(
+                alignment: Alignment.center,
+                color: const Color(0xff121212),
+                child: theImg,
+              ),
+            )
+        ));
+  }
+
+
+  // Built Image Rotating List View
+  imgTilt() {
+    return ListView(
+          padding: const EdgeInsets.all(10),
+          children: [
+          const Text("Rotating Example", style: TextStyle(fontSize: 24),),
+          rotateSlider(),
+          Text(rvalue.toString()),
+          rotateImg()
+    ]);
+  }
+
+  Widget imgXSlider() {
+    return Slider(
+      max: 10,
+      min: 0,
+      activeColor: const Color(0xffFFF321),
+      inactiveColor: const Color(0xff121212),
+
+      value: _sliderValue1,
+      onChanged: (value){
+        setState(() {
+          value1 = value.roundToDouble();
+          _sliderValue1 = value.roundToDouble();
+        });
+      },
+    );
+  }
+
+  Widget imgYSlider() {
+    return Slider(
+      max: 10,
+      min: 0,
+      activeColor: const Color(0xffFFF321),
+      inactiveColor: const Color(0xff121212),
+
+      value: _sliderValue2,
+      onChanged: (value){
+        setState(() {
+          value2 = value.roundToDouble();
+          _sliderValue2 = value.roundToDouble();
+        });
+      },
+    );
+  }
+
+  sizeImg() {
+    // alignment is needed for the height width
+    // base point for flutters measurements
+    return Align(
+        alignment: Alignment.center,
+        child: Transform.scale(
+            scaleX: value1,
+            scaleY: value2,
+            child: SizedBox(
+              height: 100,
+              width: 100,
+              child: Container(
+                alignment: Alignment.center,
+                child: theImg,
+              ),
+            )
+        ));
+  }
+
+  // Built Image Sizing List View
+  imgSize() {
+    return ListView(
+        padding: const EdgeInsets.all(10),
+        children: [
+          const Text("Image Sizing Example", style: TextStyle(fontSize: 24),),
+
+          const Text("Re-size X axis: "),
+          imgXSlider(),
+          Text(value1.toString()),
+
+          const Text("Re-size Y axis: "),
+          imgYSlider(),
+          Text(value2.toString()),
+
+          const SizedBox(width: 1,height: 200,),
+
+          sizeImg()
+        ]);
+  }
+
+  Widget offXSlider() {
+    return Slider(
+      max: 275,
+      min: 0,
+      activeColor: const Color(0xffFFF321),
+      inactiveColor: const Color(0xff121212),
+
+      value: _sliderOffX,
+      onChanged: (value){
+        setState(() {
+          offSetX = value.roundToDouble();
+          _sliderOffX = value.roundToDouble();
+        });
+      },
+    );
+  }
+
+  Widget offYSlider() {
+    return Slider(
+      max: 400,
+      min: 0,
+      activeColor: const Color(0xffFFF321),
+      inactiveColor: const Color(0xff121212),
+
+      value: _sliderOffY,
+      onChanged: (value){
+        setState(() {
+          offSetY = value.roundToDouble();
+          _sliderOffY = value.roundToDouble();
+        });
+      },
+    );
+  }
+
+  moveImg() {
+    return Align(
+      alignment: Alignment.bottomLeft,
+        child: Transform.translate(
+            offset: Offset(offSetX, offSetY),
+            child: SizedBox(
+              height: 100,
+              width: 100,
+              child: Image.asset("assets/car.png")
+            )
+        ));
+  }
+
+  imgMove() {
+    return ListView(
+        padding: const EdgeInsets.all(10),
+        children: [
+          const Text("Align Widget Example", style: TextStyle(fontSize: 24),),
+
+          const Text("Re-align X axis: "),
+          offXSlider(),
+          Text(offSetX.toString()),
+
+          const Text("Re-align Y axis: "),
+          offYSlider(),
+          Text(offSetY.toString()),
+
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          ),
+
+          moveImg()
+        ]);
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+            backgroundColor: Colors.yellow[800],
+            title:
+            const Text("Slider Project", style: TextStyle(fontSize: 36),),
+            bottom: TabBar(
+                controller: _tabController,
+                indicatorColor: Colors.amber,
+                tabs: mytabs
+            ),
+    ),
+
+        body:
+        TabBarView(
+          controller: _tabController,
+          children: [homeContext(), imgTilt(), imgSize(), imgMove()],
+        )
+        );
+    }
+  }

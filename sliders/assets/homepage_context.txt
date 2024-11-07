@@ -1,0 +1,5 @@
+Hello World, Explore my custom sliders by clicking the navigation.
+
+There is an image rotator, image sizing, and a move-able widget tabs.
+
+The Home page also displays an ability to read a text file into a section of a mobile application.
